@@ -1,0 +1,16 @@
+CREATE TABLE alunos (
+   id_aluno INT PRIMARY KEY AUTO_INCREMENT,
+   nome VARCHAR(255) NOT NULL,
+   idade INT NOT NULL,
+   matricula VARCHAR(50) NOT NULL,
+   telefone VARCHAR(20) NOT NULL,
+   turma VARCHAR(50) NOT NULL  
+);
+
+CREATE TABLE professores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    disciplina VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL
+);
