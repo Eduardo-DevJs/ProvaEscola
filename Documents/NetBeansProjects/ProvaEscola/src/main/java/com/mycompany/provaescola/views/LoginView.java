@@ -4,6 +4,12 @@
  */
 package com.mycompany.provaescola.views;
 
+import com.mycompany.provaescola.conexao.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eliria
@@ -117,7 +123,7 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        
+        Logar();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
@@ -155,8 +161,49 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
     }
-    
- 
+
+    private void Logar() {
+        String sql = "SELECT * FROM usuarios WHERE usuario = ? and senha = ?";
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        if (txtUsuario.getText().equals("") && txtSenha.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+        } else {
+            try {
+                con = Conexao.createConnectionMysql();
+                ps = con.prepareStatement(sql);
+
+                ps.setString(1, txtUsuario.getText().toLowerCase());
+                ps.setString(2, txtSenha.getText().toLowerCase());
+
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    String perfil = rs.getString(4);
+
+                    if (perfil.equals("administrador")) {
+                        Menu menu = new Menu();
+
+                        JOptionPane.showMessageDialog(null, "Seja bem vindo " + txtUsuario.getText().toUpperCase());
+
+                        menu.setVisible(true);
+
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuarios ou senha invalidos!");
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Erro ao logar " + e);
+            }
+        }
+
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel1;

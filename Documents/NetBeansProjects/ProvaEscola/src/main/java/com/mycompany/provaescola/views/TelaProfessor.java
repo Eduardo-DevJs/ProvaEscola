@@ -4,6 +4,12 @@
  */
 package com.mycompany.provaescola.views;
 
+import com.mycompany.provaescola.controller.ProfessorController;
+import com.mycompany.provaescola.dao.ProfessorDAO;
+import com.mycompany.provaescola.models.ProfessorModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author eliria
@@ -15,6 +21,7 @@ public class TelaProfessor extends javax.swing.JFrame {
      */
     public TelaProfessor() {
         initComponents();
+        ListaAlunos();
     }
 
     /**
@@ -41,6 +48,7 @@ public class TelaProfessor extends javax.swing.JFrame {
         txtTelefoneProfessor = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         txtTurma = new javax.swing.JTextField();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Aluno");
@@ -76,6 +84,11 @@ public class TelaProfessor extends javax.swing.JFrame {
         btnCadastrarProfessor.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnCadastrarProfessor.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrarProfessor.setText("CADASTRAR");
+        btnCadastrarProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarProfessorActionPerformed(evt);
+            }
+        });
 
         tabelaProfessores.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tabelaProfessores.setModel(new javax.swing.table.DefaultTableModel(
@@ -90,6 +103,11 @@ public class TelaProfessor extends javax.swing.JFrame {
             }
         ));
         tabelaProfessores.setRowHeight(30);
+        tabelaProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaProfessoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaProfessores);
 
         try {
@@ -106,16 +124,23 @@ public class TelaProfessor extends javax.swing.JFrame {
         txtTurma.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtTurma.setMargin(new java.awt.Insets(2, 12, 2, 6));
 
+        btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -123,15 +148,18 @@ public class TelaProfessor extends javax.swing.JFrame {
                                 .addGap(8, 8, 8)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(txtDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(304, 304, 304)
+                                .addComponent(jLabel1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE))
                             .addComponent(txtTurma)))
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -143,7 +171,10 @@ public class TelaProfessor extends javax.swing.JFrame {
                                 .addComponent(txtTelefoneProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCadastrarProfessor))
-                            .addComponent(jLabel5))))
+                            .addComponent(jLabel5)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
@@ -176,7 +207,9 @@ public class TelaProfessor extends javax.swing.JFrame {
                     .addComponent(txtTelefoneProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btnVoltar)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -189,12 +222,35 @@ public class TelaProfessor extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        Menu menu = new Menu();
+
+        menu.setVisible(true);
+
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnCadastrarProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProfessorActionPerformed
+        // TODO add your handling code here:
+        CadastrarProfessor();
+        LimparCampos();
+        ListaAlunos();
+    }//GEN-LAST:event_btnCadastrarProfessorActionPerformed
+
+    private void tabelaProfessoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProfessoresMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tabelaProfessoresMouseClicked
 
     /**
      * @param args the command line arguments
@@ -232,8 +288,66 @@ public class TelaProfessor extends javax.swing.JFrame {
         });
     }
 
+    private void CadastrarProfessor() {
+        String nomeProfessor = txtNomeProfessor.getText();
+        String discplina = txtDisciplina.getText();
+        String turma = txtTurma.getText();
+        String email = txtEmail.getText();
+        String telefone = txtTelefoneProfessor.getText();
+
+        boolean sucesso;
+        
+          try {
+              ProfessorController pc = new ProfessorController();
+            sucesso = pc.CadastroProfessor(nomeProfessor, discplina, telefone, email, turma);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar professor (TELA) " + e);
+        }
+
+    }
+    
+        public void ListaAlunos() {
+        try {
+            ProfessorDAO pdao = new ProfessorDAO();
+
+            DefaultTableModel model = (DefaultTableModel) tabelaProfessores.getModel();
+
+            model.setNumRows(0);
+
+            for (ProfessorModel am : pdao.mostraProfessor()) {
+                model.addRow(new Object[]{
+                    am.getId_professor(),
+                    am.getNome_professor(),
+                    am.getDisciplina(),
+                    am.getEmail(),
+                    am.getTelefone(),
+                    am.getTurma(),});
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao listar professores (TELA): " + e);
+        }
+    }
+    
+    private void LimparCampos(){
+        txtDisciplina.setText("");
+        txtEmail.setText("");
+        txtNomeProfessor.setText("");
+        txtTelefoneProfessor.setText("");
+        txtTurma.setText("");
+        txtNomeProfessor.requestFocus();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarProfessor;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

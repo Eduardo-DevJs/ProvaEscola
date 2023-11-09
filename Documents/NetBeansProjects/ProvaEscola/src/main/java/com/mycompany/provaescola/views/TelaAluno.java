@@ -7,7 +7,9 @@ package com.mycompany.provaescola.views;
 import com.mycompany.provaescola.controller.AlunoController;
 import com.mycompany.provaescola.dao.AlunoDAO;
 import com.mycompany.provaescola.models.AlunoModel;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaAluno extends javax.swing.JFrame {
@@ -17,7 +19,7 @@ public class TelaAluno extends javax.swing.JFrame {
      */
     public TelaAluno() {
         initComponents();
-        ListaProdutos();
+        ListaAlunos();
     }
 
     /**
@@ -44,6 +46,7 @@ public class TelaAluno extends javax.swing.JFrame {
         txtTelefone = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         txtTurma = new javax.swing.JTextField();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Aluno");
@@ -119,10 +122,22 @@ public class TelaAluno extends javax.swing.JFrame {
         txtTurma.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtTurma.setMargin(new java.awt.Insets(2, 12, 2, 6));
 
+        btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(303, 303, 303)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,17 +165,17 @@ public class TelaAluno extends javax.swing.JFrame {
                                 .addGap(13, 13, 13)
                                 .addComponent(jLabel6)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCadastrarAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(txtTurma)))))
+                                .addComponent(txtTurma))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCadastrarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(303, 303, 303)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,14 +201,15 @@ public class TelaAluno extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCadastrarAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                    .addComponent(txtIdadeAluno))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtIdadeAluno)
+                    .addComponent(btnCadastrarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefone, javax.swing.GroupLayout.Alignment.LEADING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnVoltar)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,7 +222,7 @@ public class TelaAluno extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -215,14 +231,23 @@ public class TelaAluno extends javax.swing.JFrame {
 
     private void btnCadastrarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAlunoActionPerformed
         // TODO add your handling code here:
-        CadastroCliente();
+        CadastroAluno();
         LimparCampos();
-        ListaProdutos();
+        ListaAlunos();
     }//GEN-LAST:event_btnCadastrarAlunoActionPerformed
 
     private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
         carregarCampos();
     }//GEN-LAST:event_tabelaAlunosMouseClicked
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        Menu menu = new Menu();
+        
+        menu.setVisible(true);
+        
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,7 +284,7 @@ public class TelaAluno extends javax.swing.JFrame {
         });
     }
 
-    private void CadastroCliente() {
+    private void CadastroAluno() {
         String nomeAluno = txtNomeAluno.getText();
         int idadeAluno = Integer.parseInt(txtIdadeAluno.getText());
         String turmaAluno = txtTurma.getText();
@@ -283,7 +308,7 @@ public class TelaAluno extends javax.swing.JFrame {
         }
     }
 
-    public void ListaProdutos() {
+    public void ListaAlunos() {
         try {
             AlunoDAO adao = new AlunoDAO();
 
@@ -330,9 +355,51 @@ public class TelaAluno extends javax.swing.JFrame {
         txtNomeAluno.requestFocus();
     }
 
+    /*GETTERS E SETTERS*/
+    public JTextField getTxtIdadeAluno() {
+        return txtIdadeAluno;
+    }
+
+    public void setTxtIdadeAluno(JTextField txtIdadeAluno) {
+        this.txtIdadeAluno = txtIdadeAluno;
+    }
+
+    public JTextField getTxtMatriculaAluno() {
+        return txtMatriculaAluno;
+    }
+
+    public void setTxtMatriculaAluno(JTextField txtMatriculaAluno) {
+        this.txtMatriculaAluno = txtMatriculaAluno;
+    }
+
+    public JTextField getTxtNomeAluno() {
+        return txtNomeAluno;
+    }
+
+    public void setTxtNomeAluno(JTextField txtNomeAluno) {
+        this.txtNomeAluno = txtNomeAluno;
+    }
+
+    public JFormattedTextField getTxtTelefone() {
+        return txtTelefone;
+    }
+
+    public void setTxtTelefone(JFormattedTextField txtTelefone) {
+        this.txtTelefone = txtTelefone;
+    }
+
+    public JTextField getTxtTurma() {
+        return txtTurma;
+    }
+
+    public void setTxtTurma(JTextField txtTurma) {
+        this.txtTurma = txtTurma;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarAluno;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -1,13 +1,13 @@
-
 package com.mycompany.provaescola.models;
 
-
 public class ProfessorModel {
+
     private int id_professor;
     private String nome_professor;
     private String disciplina;
     private String telefone;
     private String email;
+    private String turma;
 
     public ProfessorModel() {
     }
@@ -18,6 +18,15 @@ public class ProfessorModel {
         this.disciplina = disciplina;
         this.telefone = telefone;
         this.email = email;
+    }
+
+    public ProfessorModel(String nome_professor, String disciplina, String telefone, String email, String turma) {
+        this.nome_professor = nome_professor;
+        this.disciplina = disciplina;
+        this.telefone = telefone;
+        this.email = email;
+        this.turma = turma;
+
     }
 
     public int getId_professor() {
@@ -58,6 +67,14 @@ public class ProfessorModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTurma() {
+        return turma;
+    }
+
+    public void setTurma(String turma) {
+        this.turma = turma;
     }
     
     
